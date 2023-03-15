@@ -1,0 +1,13 @@
+header{
+    text-align: center;
+    background-color: rgb(42, 39, 39);
+    color: aliceblue;
+}
+
+.mylinks{
+    color: wheat;
+    text-decoration: none;
+}
+.mylinks:hover{
+    color: rgb(122, 158, 178);
+}
