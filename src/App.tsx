@@ -1,15 +1,10 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  BrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import TierListPage from "./components/tier-list/TierListPage";
 import HomePage from "./layout/HomePage";
 import PlayerPage from "./components/player/Player";
+import TestPage from "./components/test/testIGDBAPI";
 
 function App() {
   return (
@@ -18,7 +13,7 @@ function App() {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
             <a className="navbar-brand" href="#">
-              yoUr DIgiTal OaSis
+              YDO
             </a>
             <button
               className="navbar-toggler"
@@ -91,6 +86,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/tierlist" element={<TierListPage />} />
           <Route path="/player" element={<PlayerPage />} />
+          <Route path="/test" element={<TestPage />} />
         </Routes>
       </div>
     </div>
@@ -98,32 +94,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <div className="row">
-          <div className="col">
-            <div className="home">
-              <a className="mylinks" href="/">
-                {" "}
-                Home
-              </a>
-            </div>
-          </div>
-          <div className="col">
-            <div className="tierlist">
-              <a className="mylinks" href="/tierlist">
-                {" "}
-                Tier-list
-              </a>
-            </div>
-          </div>
-          <div className="col">
-            <div className="player">
-              <a className="mylinks" href="/player">
-                {" "}
-                Player
-              </a>
-            </div>
-          </div>
-        </div> */
-}
