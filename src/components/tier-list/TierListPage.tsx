@@ -1,16 +1,7 @@
-import React, {
-  DragEvent,
-  FC,
-  PropsWithChildren,
-  useEffect,
-  useState,
-} from "react";
+import React, { DragEvent, useEffect, useState } from "react";
 import ITierList from "./models/ITierList";
 import data from "./data/items.json";
 import "./styles/tierlist.component.css";
-import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import user_secrets from "./data/IGDBauth.json";
 import axios from "axios";
 const pepeImage = require("./images/pepestare.jpg");
@@ -24,8 +15,6 @@ const TierListPage = () => {
     { name: "D", items: [] },
     { name: "Pool", items: [] },
   ]);
-
-  // const [items, setItems] = useState<string[]>([]);
 
   useEffect(() => {
     //let _data = data.games;
@@ -64,8 +53,6 @@ const TierListPage = () => {
     const originTierIndex = tiers.findIndex((tier) =>
       tier.items.some((item) => item.name === itemName)
     ); // index of origin tier
-
-    // const itemsPoolIndex = items.indexOf(itemName); // index of item
 
     if (originTierIndex !== -1) {
       const updatedTiers = [...tiers]; // copy the array
