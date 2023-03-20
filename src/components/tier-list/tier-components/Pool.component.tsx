@@ -13,6 +13,7 @@ const Pool: React.FC<PoolProps> = ({
   tierIndex,
   isLoading,
   fetchGameImage,
+  setGameSearch,
 }) => {
   return (
     <div
@@ -23,7 +24,11 @@ const Pool: React.FC<PoolProps> = ({
       <div className="poolNameBox p-2">
         <h2 className="poolName text-center">{name}</h2>
       </div>
-      <SearchGames isLoading={isLoading} fetchGameImage={fetchGameImage} />
+      <SearchGames
+        isLoading={isLoading}
+        fetchGameImage={fetchGameImage}
+        setGameSearch={setGameSearch}
+      />
       <PoolItems items={items} onDragStart={onDragStart} />
     </div>
   );

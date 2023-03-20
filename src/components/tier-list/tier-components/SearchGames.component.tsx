@@ -5,6 +5,7 @@ import { SearchGamesProps } from "./TierCompProps";
 const SearchGames: React.FC<SearchGamesProps> = ({
   isLoading,
   fetchGameImage,
+  setGameSearch,
 }) => {
   return (
     <div className="centered">
@@ -16,6 +17,9 @@ const SearchGames: React.FC<SearchGamesProps> = ({
             placeholder="Recipient's username"
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
+            onChange={(e) => {
+              setGameSearch(e.target.value);
+            }}
           />
           <div className="input-group-append">
             <button

@@ -9,6 +9,7 @@ export type TierProps = {
 
 export type SearchGamesProps = {
   isLoading: boolean;
+  setGameSearch: React.Dispatch<React.SetStateAction<string>>;
   fetchGameImage: () => Promise<void>;
 };
 

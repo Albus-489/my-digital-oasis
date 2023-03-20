@@ -10,16 +10,7 @@ const pepeImage = require("./images/penumbra.jpg");
 
 const TierListPage = () => {
   const [tiers, setTierList] = useState<ITierList[]>([
-    {
-      name: "S",
-      items: [
-        { name: "Tier", image: pepeImage },
-        { name: "Tier1", image: pepeImage },
-        { name: "Tier2", image: pepeImage },
-        { name: "Tier3", image: pepeImage },
-        { name: "Tier4", image: pepeImage },
-      ],
-    },
+    { name: "S", items: [] },
     { name: "A", items: [] },
     { name: "B", items: [] },
     { name: "C", items: [] },
@@ -29,8 +20,9 @@ const TierListPage = () => {
   const [gameSearchName, setGameSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  async function fetchGameImage(gameName: string) {
+  async function fetchGameImage() {
     setIsLoading(true);
+
     const fields: string = "cover.image_id";
     const limit: number = 1;
     const queryData: string = `search "${gameSearchName}"; fields ${fields}; limit ${limit};`;
@@ -51,7 +43,7 @@ const TierListPage = () => {
         console.log(imageURL);
 
         const updatedPool = [...tiers];
-        updatedPool[5].items.push({ name: gameName, image: imageURL });
+        updatedPool[5].items.push({ name: gameSearchName, image: imageURL });
         setTierList(updatedPool);
       })
       .catch((error) => {
@@ -101,24 +93,30 @@ const TierListPage = () => {
       <h2 className="text-start mb-5 mt-3">Tier List</h2>
       {tiers.map((tier, index) =>
         tier.name !== "Pool" ? (
-          <Tier
-            name={tier.name}
-            items={tier.items}
-            onDragStart={onDragStart}
-            onDragOver={onDragOver}
-            onDrop={onDrop}
-            tierIndex={index}
-          />
+          <div className="tier-row" key={index}>
+            <Tier
+              name={tier.name}
+              items={tier.items}
+              onDragStart={onDragStart}
+              onDragOver={onDragOver}
+              onDrop={onDrop}
+              tierIndex={index}
+            />
+          </div>
         ) : (
-          <Pool
-            name={tier.name}
-            items={tier.items}
-            onDragStart={onDragStart}
-            onDragOver={onDragOver}
-            onDrop={onDrop}
-            tierIndex={index}
-            isLoading={isLoading}
-          />
+          <div className="pool-row" key={index}>
+            <Pool
+              name={tier.name}
+              items={tier.items}
+              onDragStart={onDragStart}
+              onDragOver={onDragOver}
+              onDrop={onDrop}
+              tierIndex={index}
+              isLoading={isLoading}
+              fetchGameImage={fetchGameImage}
+              setGameSearch={setGameSearch}
+            />
+          </div>
         )
       )}
     </div>
