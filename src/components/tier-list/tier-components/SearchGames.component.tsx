@@ -1,10 +1,14 @@
 import React from "react";
 import "../styles/searchGames.style.css";
-import { SearchGamesProps } from "./TierCompProps";
+import { SearchGamesProps, fetchGameImageProps } from "./TierCompProps";
+import { fetchGameImage } from "../funcs/axiosHelper";
 
 const SearchGames: React.FC<SearchGamesProps> = ({
   isLoading,
-  fetchGameImage,
+  setIsLoading,
+  gameSearchName,
+  tiers,
+  setTierList,
   setGameSearch,
 }) => {
   return (
@@ -23,7 +27,14 @@ const SearchGames: React.FC<SearchGamesProps> = ({
           />
           <div className="input-group-append">
             <button
-              onClick={() => fetchGameImage()}
+              onClick={() =>
+                fetchGameImage({
+                  setIsLoading,
+                  gameSearchName,
+                  tiers,
+                  setTierList,
+                })
+              }
               className="findGameBtn btn btn-primary"
               type="button"
             >
