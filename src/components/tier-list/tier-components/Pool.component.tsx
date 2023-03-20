@@ -17,8 +17,10 @@ const Pool: React.FC<PoolProps> = (rest) => {
       <div className="poolNameBox p-2">
         <h2 className="poolName text-center">{rest.name}</h2>
       </div>
-      <SearchGames {...rest} />
-      <PoolItems items={rest.items} onDragStart={onDragStart} />
+      <div style={{ position: "relative" }}>
+        <SearchGames {...rest} />
+        <PoolItems items={rest.items} onDragStart={onDragStart} />
+      </div>
     </div>
   );
 };

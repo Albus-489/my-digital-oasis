@@ -17,7 +17,24 @@ const TierListPage = () => {
     { name: "B", items: [] },
     { name: "C", items: [] },
     { name: "D", items: [] },
-    { name: "Pool", items: [] },
+    {
+      name: "Pool",
+      items: [
+        { name: "Pool", image: pepeImage },
+        { name: "Pool", image: pepeImage },
+        { name: "Pool", image: pepeImage },
+        { name: "Pool", image: pepeImage },
+        { name: "Pool", image: pepeImage },
+      ],
+    },
+  ]);
+  const [searchList, setSearchList] = useState<
+    { name: string; image: string }[]
+  >([
+    { name: "Dark Souls", image: pepeImage },
+    { name: "Dark Souls", image: pepeImage },
+    { name: "Dark Souls", image: pepeImage },
+    { name: "Dark Souls", image: pepeImage },
   ]);
   const [gameSearchName, setGameSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,15 +57,14 @@ const TierListPage = () => {
             <Pool
               tiers={tiers}
               setTierList={setTierList}
-              {...tier}
-              onDragStart={onDragStart}
-              onDragOver={onDragOver}
-              onDrop={onDrop}
-              tierIndex={index}
+              searchList={searchList}
+              setSearchList={setSearchList}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
               setGameSearch={setGameSearch}
               gameSearchName={gameSearchName}
+              tierIndex={index}
+              {...tier}
             />
           </div>
         )

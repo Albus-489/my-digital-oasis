@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/searchGames.style.css";
 import { SearchGamesProps, fetchGameImageProps } from "./TierCompProps";
-import { fetchGameImage } from "../funcs/axiosHelper";
+import { fetchGameImage, fetchGameImages } from "../funcs/axiosHelper";
 
 const SearchGames: React.FC<SearchGamesProps> = ({
   isLoading,
   setIsLoading,
-  gameSearchName,
+
   tiers,
   setTierList,
+
+  gameSearchName,
   setGameSearch,
+
+  searchList,
+  setSearchList,
 }) => {
+  const [listIsActive, setListIsActive] = useState<boolean>(true);
   return (
     <div className="centered">
       <div className="searchBox col-md-4">
@@ -27,14 +33,16 @@ const SearchGames: React.FC<SearchGamesProps> = ({
           />
           <div className="input-group-append">
             <button
-              onClick={() =>
-                fetchGameImage({
+              onClick={() => {
+                fetchGameImages({
                   setIsLoading,
                   gameSearchName,
-                  tiers,
-                  setTierList,
-                })
-              }
+                  searchList,
+                  setSearchList,
+                });
+
+                setListIsActive(true);
+              }}
               className="findGameBtn btn btn-primary"
               type="button"
             >
@@ -43,10 +51,32 @@ const SearchGames: React.FC<SearchGamesProps> = ({
                   <span className="visually-hidden">Loading...</span>
                 </div>
               ) : (
-                <div>Find</div>
+                <div>Search</div>
               )}
             </button>
           </div>
+        </div>
+
+        <div
+          className="testArea col-md-12"
+          style={listIsActive ? { display: "block" } : { display: "none" }}
+        >
+          <div className="closeBtnBox">
+            {/* CLOSE TAB BUTTON */}
+            <a
+              onClick={() => setListIsActive(false)}
+              id="closeTabBtn"
+              type="button"
+            >
+              close tab
+            </a>
+          </div>
+          {searchList.map((item, index) => (
+            <div className="" key={index}>
+              <img src={item.image} alt={item.name} />
+              <p>{item.name}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
