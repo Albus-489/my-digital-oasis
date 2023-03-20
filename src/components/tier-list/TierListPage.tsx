@@ -7,6 +7,7 @@ import axios from "axios";
 import Tier from "./tier-components/Tier.component";
 import Pool from "./tier-components/Pool.component";
 import { onDragOver, onDragStart, onDrop } from "./funcs/dragndropHelper";
+import { fetchGameImage } from "./funcs/axiosHelper";
 const pepeImage = require("./images/penumbra.jpg");
 
 const TierListPage = () => {
@@ -21,64 +22,6 @@ const TierListPage = () => {
   const [gameSearchName, setGameSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  async function fetchGameImage() {
-    setIsLoading(true);
-
-    const fields: string = "cover.image_id";
-    const limit: number = 1;
-    const queryData: string = `search "${gameSearchName}"; fields ${fields}; limit ${limit};`;
-
-    const response = await axios({
-      url: "http://localhost:3001/api/games",
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Client-ID": user_secrets[0].apiKey,
-        Authorization: user_secrets[0].token,
-      },
-      data: queryData,
-    })
-      .then((response) => {
-        const imageId = response.data[0].cover.image_id;
-        const imageURL = `https://images.igdb.com/igdb/image/upload/t_cover_big/${imageId}.jpg`;
-        console.log(imageURL);
-
-        const updatedPool = [...tiers];
-        updatedPool[5].items.push({ name: gameSearchName, image: imageURL });
-        setTierList(updatedPool);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
-
-  // const onDrop = (event: DragEvent<HTMLDivElement>, tierIndex: number) => {
-  //   const itemName = event.dataTransfer.getData("text"); //which item was selected
-  //   const originTierIndex = tiers.findIndex((tier) =>
-  //     tier.items.some((item) => item.name === itemName)
-  //   ); // index of origin tier
-
-  //   if (originTierIndex !== -1) {
-  //     const updatedTiers = [...tiers]; // copy the array
-
-  //     const item = updatedTiers[originTierIndex].items.find(
-  //       (item) => item.name === itemName
-  //     ); // find the item that will be moved
-
-  //     updatedTiers[originTierIndex].items = updatedTiers[
-  //       originTierIndex
-  //     ].items.filter((item) => item.name !== itemName); // remove the item from the origin array
-
-  //     updatedTiers[tierIndex].items.unshift(item!); // add the item to the destination array
-  //     setTierList(updatedTiers); // update the state
-  //   }
-
-  //   console.log(originTierIndex);
-  // };
-
   return (
     <div className="TierList">
       <h2 className="text-start mb-5 mt-3">Tier List</h2>
@@ -88,11 +31,7 @@ const TierListPage = () => {
             <Tier
               tiers={tiers}
               setTierList={setTierList}
-              name={tier.name}
-              items={tier.items}
-              onDragStart={onDragStart}
-              onDragOver={onDragOver}
-              onDrop={onDrop}
+              {...tier}
               tierIndex={index}
             />
           </div>
@@ -101,15 +40,15 @@ const TierListPage = () => {
             <Pool
               tiers={tiers}
               setTierList={setTierList}
-              name={tier.name}
-              items={tier.items}
+              {...tier}
               onDragStart={onDragStart}
               onDragOver={onDragOver}
               onDrop={onDrop}
               tierIndex={index}
               isLoading={isLoading}
-              fetchGameImage={fetchGameImage}
+              setIsLoading={setIsLoading}
               setGameSearch={setGameSearch}
+              gameSearchName={gameSearchName}
             />
           </div>
         )
