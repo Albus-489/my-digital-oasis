@@ -1,0 +1,14 @@
+.poolNameBox{
+    border-top: 1px solid rgb(143, 55, 55);
+}
+.poolItem{
+    margin: 0 1% 0 0;
+}
+
+.poolItemsRow{
+    min-height: 100px;
+    background-color: rgba(42, 39, 39, 0.616);
+    padding: 1%;
+    margin-bottom: 1%;
+    border-radius: 5px;
+}
