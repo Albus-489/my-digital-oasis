@@ -1,14 +1,6 @@
 import React from "react";
 import "../styles/tier.style.css";
-
-type TierProps = {
-  name: string;
-  items: { name: string; image: string }[];
-  onDragStart: (event: React.DragEvent<HTMLDivElement>, name: string) => void;
-  onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
-  onDrop: (event: React.DragEvent<HTMLDivElement>, tierIndex: number) => void;
-  tierIndex: number;
-};
+import { TierProps } from "./TierCompProps";
 
 const Tier: React.FC<TierProps> = ({
   name,

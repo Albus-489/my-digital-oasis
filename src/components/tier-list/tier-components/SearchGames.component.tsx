@@ -1,9 +1,11 @@
 import React from "react";
 import "../styles/searchGames.style.css";
+import { SearchGamesProps } from "./TierCompProps";
 
-type SearchGamesProps = {};
-
-const SearchGames: React.FC = () => {
+const SearchGames: React.FC<SearchGamesProps> = ({
+  isLoading,
+  fetchGameImage,
+}) => {
   return (
     <div className="centered">
       <div className="searchBox col-md-4">
@@ -16,8 +18,18 @@ const SearchGames: React.FC = () => {
             aria-describedby="basic-addon2"
           />
           <div className="input-group-append">
-            <button className="findGameBtn btn btn-primary" type="button">
-              Find
+            <button
+              onClick={() => fetchGameImage()}
+              className="findGameBtn btn btn-primary"
+              type="button"
+            >
+              {isLoading ? (
+                <div className="spinner-border spinner-border-sm" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                <div>Find</div>
+              )}
             </button>
           </div>
         </div>

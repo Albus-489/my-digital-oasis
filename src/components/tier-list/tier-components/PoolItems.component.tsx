@@ -1,17 +1,13 @@
 import React from "react";
-
-type PoolItemsProps = {
-  items: { name: string; image: string }[];
-  onDragStart: (event: React.DragEvent<HTMLDivElement>, name: string) => void;
-};
+import { PoolItemsProps } from "./TierCompProps";
 
 const PoolItems: React.FC<PoolItemsProps> = ({ items, onDragStart }) => {
   return (
     <div className="poolItemsRow d-flex">
-      {items.map((item) => (
+      {items.map((item, index) => (
         <div
           className="poolItem"
-          key={item.name}
+          key={item.name + index}
           draggable
           onDragStart={(event) => onDragStart(event, item.name)}
         >
