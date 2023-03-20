@@ -1,4 +1,4 @@
-import React, { DragEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ITierList from "./models/ITierList";
 // import data from "./data/items.json";
 import "./styles/tierlist.style.css";
@@ -6,6 +6,7 @@ import user_secrets from "./data/IGDBauth.json";
 import axios from "axios";
 import Tier from "./tier-components/Tier.component";
 import Pool from "./tier-components/Pool.component";
+import { onDragOver, onDragStart, onDrop } from "./funcs/dragndropHelper";
 const pepeImage = require("./images/penumbra.jpg");
 
 const TierListPage = () => {
@@ -54,39 +55,29 @@ const TierListPage = () => {
       });
   }
 
-  const onDragStart = (event: DragEvent, name: string) => {
-    event.dataTransfer.setData("text/plain", name);
-    console.log("Drag started", name);
-  };
+  // const onDrop = (event: DragEvent<HTMLDivElement>, tierIndex: number) => {
+  //   const itemName = event.dataTransfer.getData("text"); //which item was selected
+  //   const originTierIndex = tiers.findIndex((tier) =>
+  //     tier.items.some((item) => item.name === itemName)
+  //   ); // index of origin tier
 
-  const onDragOver = (event: DragEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-    event.preventDefault();
-  };
+  //   if (originTierIndex !== -1) {
+  //     const updatedTiers = [...tiers]; // copy the array
 
-  const onDrop = (event: DragEvent<HTMLDivElement>, tierIndex: number) => {
-    const itemName = event.dataTransfer.getData("text"); //which item was selected
-    const originTierIndex = tiers.findIndex((tier) =>
-      tier.items.some((item) => item.name === itemName)
-    ); // index of origin tier
+  //     const item = updatedTiers[originTierIndex].items.find(
+  //       (item) => item.name === itemName
+  //     ); // find the item that will be moved
 
-    if (originTierIndex !== -1) {
-      const updatedTiers = [...tiers]; // copy the array
+  //     updatedTiers[originTierIndex].items = updatedTiers[
+  //       originTierIndex
+  //     ].items.filter((item) => item.name !== itemName); // remove the item from the origin array
 
-      const item = updatedTiers[originTierIndex].items.find(
-        (item) => item.name === itemName
-      ); // find the item that will be moved
+  //     updatedTiers[tierIndex].items.unshift(item!); // add the item to the destination array
+  //     setTierList(updatedTiers); // update the state
+  //   }
 
-      updatedTiers[originTierIndex].items = updatedTiers[
-        originTierIndex
-      ].items.filter((item) => item.name !== itemName); // remove the item from the origin array
-
-      updatedTiers[tierIndex].items.unshift(item!); // add the item to the destination array
-      setTierList(updatedTiers); // update the state
-    }
-
-    console.log(originTierIndex);
-  };
+  //   console.log(originTierIndex);
+  // };
 
   return (
     <div className="TierList">
@@ -95,6 +86,8 @@ const TierListPage = () => {
         tier.name !== "Pool" ? (
           <div className="tier-row" key={index}>
             <Tier
+              tiers={tiers}
+              setTierList={setTierList}
               name={tier.name}
               items={tier.items}
               onDragStart={onDragStart}
@@ -106,6 +99,8 @@ const TierListPage = () => {
         ) : (
           <div className="pool-row" key={index}>
             <Pool
+              tiers={tiers}
+              setTierList={setTierList}
               name={tier.name}
               items={tier.items}
               onDragStart={onDragStart}

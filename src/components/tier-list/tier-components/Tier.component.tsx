@@ -3,6 +3,8 @@ import "../styles/tier.style.css";
 import { TierProps } from "./TierCompProps";
 
 const Tier: React.FC<TierProps> = ({
+  tiers,
+  setTierList,
   name,
   items,
   onDragStart,
@@ -14,7 +16,7 @@ const Tier: React.FC<TierProps> = ({
     <div
       className="tierContainer mb-2 mt-2 row flex-row"
       onDragOver={onDragOver}
-      onDrop={(event) => onDrop(event, tierIndex)}
+      onDrop={(event) => onDrop(event, tierIndex, tiers, setTierList)}
     >
       <div className="label-holder col-1">
         <h2>{name}</h2>

@@ -5,6 +5,8 @@ import SearchGames from "./SearchGames.component";
 import { PoolProps } from "./TierCompProps";
 
 const Pool: React.FC<PoolProps> = ({
+  tiers,
+  setTierList,
   name,
   items,
   onDragStart,
@@ -19,7 +21,7 @@ const Pool: React.FC<PoolProps> = ({
     <div
       className="poolBox"
       onDragOver={onDragOver}
-      onDrop={(event) => onDrop(event, tierIndex)}
+      onDrop={(event) => onDrop(event, tierIndex, tiers, setTierList)}
     >
       <div className="poolNameBox p-2">
         <h2 className="poolName text-center">{name}</h2>
