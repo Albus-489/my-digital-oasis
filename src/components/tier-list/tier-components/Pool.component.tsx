@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/pool.style.css";
 import PoolItems from "./PoolItems.component";
-import SearchGames from "./SearchGame.component";
+import SearchGames from "./SearchGames.component";
 
 type TierProps = {
   name: string;
