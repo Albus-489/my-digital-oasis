@@ -1,4 +1,5 @@
 import React from "react";
+import { onDragOver, onDragStart, onDrop } from "../funcs/dragndropHelper";
 import "../styles/tier.style.css";
 import { TierProps } from "./TierCompProps";
 
@@ -7,9 +8,6 @@ const Tier: React.FC<TierProps> = ({
   setTierList,
   name,
   items,
-  onDragStart,
-  onDragOver,
-  onDrop,
   tierIndex,
 }) => {
   return (

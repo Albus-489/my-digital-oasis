@@ -6,22 +6,17 @@ export type TierProps = {
   setTierList: React.Dispatch<React.SetStateAction<ITier[]>>;
   name: string;
   items: { name: string; image: string }[];
-  onDragStart: (event: React.DragEvent<HTMLDivElement>, name: string) => void;
-  onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
-  onDrop: (
-    event: React.DragEvent<HTMLDivElement>,
-    tierIndex: number,
-    tiers: ITier[],
-    setTierList: React.Dispatch<React.SetStateAction<ITier[]>>
-  ) => void;
   tierIndex: number;
 };
 
 // ** Search game props
 export type SearchGamesProps = {
   isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setGameSearch: React.Dispatch<React.SetStateAction<string>>;
-  fetchGameImage: () => Promise<void>;
+  gameSearchName: string;
+  tiers: ITier[];
+  setTierList: React.Dispatch<React.SetStateAction<ITier[]>>;
 };
 
 // ** Pool items props
@@ -35,6 +30,7 @@ export type PoolProps = {
   tiers: ITier[];
   setTierList: React.Dispatch<React.SetStateAction<ITier[]>>;
   name: string;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   items: { name: string; image: string }[];
   onDragStart: (event: React.DragEvent<HTMLDivElement>, name: string) => void;
   onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
@@ -45,8 +41,15 @@ export type PoolProps = {
     setTierList: React.Dispatch<React.SetStateAction<ITier[]>>
   ) => void;
   tierIndex: number;
-
   isLoading: boolean;
-  fetchGameImage: () => Promise<void>;
+  gameSearchName: string;
   setGameSearch: React.Dispatch<React.SetStateAction<string>>;
+};
+
+// ** Axios fetc images
+export type fetchGameImageProps = {
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  gameSearchName: string;
+  tiers: ITier[];
+  setTierList: React.Dispatch<React.SetStateAction<ITier[]>>;
 };
