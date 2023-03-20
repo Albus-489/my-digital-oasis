@@ -5,6 +5,7 @@
 /src/components/tier-list/proxy/node_modules
 /.pnp
 .pnp.js
+/src/components/tier-list/data
 
 # testing
 /coverage
