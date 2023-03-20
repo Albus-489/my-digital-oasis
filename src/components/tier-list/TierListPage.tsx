@@ -1,30 +1,40 @@
 import React, { DragEvent, useEffect, useState } from "react";
 import ITierList from "./models/ITierList";
-import data from "./data/items.json";
-import "./styles/tierlist.component.css";
+// import data from "./data/items.json";
+import "./styles/tierlist.style.css";
 import user_secrets from "./data/IGDBauth.json";
 import axios from "axios";
-const pepeImage = require("./images/pepestare.jpg");
+import Tier from "./tier-components/Tier.component";
+import Pool from "./tier-components/Pool.component";
+const pepeImage = require("./images/penumbra.jpg");
 
 const TierListPage = () => {
   const [tiers, setTierList] = useState<ITierList[]>([
-    { name: "S", items: [] },
+    {
+      name: "S",
+      items: [
+        { name: "Tier", image: pepeImage },
+        { name: "Tier1", image: pepeImage },
+        { name: "Tier2", image: pepeImage },
+        { name: "Tier3", image: pepeImage },
+        { name: "Tier4", image: pepeImage },
+      ],
+    },
     { name: "A", items: [] },
     { name: "B", items: [] },
     { name: "C", items: [] },
     { name: "D", items: [] },
     { name: "Pool", items: [] },
   ]);
-
-  useEffect(() => {
-    //let _data = data.games;
-    let updatedPool = [...tiers];
-
-    //updatedPool[5].items = _data.map((name) => ({ name, image: pepeImage }));
-    setTierList(updatedPool);
-  }, []);
+  const [gameSearchName, setGameSearch] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function fetchGameImage(gameName: string) {
+    setIsLoading(true);
+    const fields: string = "cover.image_id";
+    const limit: number = 1;
+    const queryData: string = `search "${gameSearchName}"; fields ${fields}; limit ${limit};`;
+
     const response = await axios({
       url: "http://localhost:3001/api/games",
       method: "POST",
@@ -33,9 +43,23 @@ const TierListPage = () => {
         "Client-ID": user_secrets[0].apiKey,
         Authorization: user_secrets[0].token,
       },
-      data: `fields name;`,
-    });
-    return response.data[0]?.name || null;
+      data: queryData,
+    })
+      .then((response) => {
+        const imageId = response.data[0].cover.image_id;
+        const imageURL = `https://images.igdb.com/igdb/image/upload/t_cover_big/${imageId}.jpg`;
+        console.log(imageURL);
+
+        const updatedPool = [...tiers];
+        updatedPool[5].items.push({ name: gameName, image: imageURL });
+        setTierList(updatedPool);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   const onDragStart = (event: DragEvent, name: string) => {
@@ -73,100 +97,30 @@ const TierListPage = () => {
   };
 
   return (
-    <div>
-      <div className="row flex-row">
-        <div style={{ border: "1px solid red" }} className="label-holder col-2">
-          <span>S</span>
-        </div>
-
-        <div className="tire-row col-10" style={{ border: "2px solid white" }}>
-          asd
-        </div>
-      </div>
-      <div className="tiers">
-        <h2 className="mt-4">Tier List</h2>
-        {tiers.map((tier, tierIndex) =>
-          tierIndex !== 5 ? (
-            <div
-              key={tier.name}
-              className="tier m-4"
-              onDragOver={(event) => onDragOver(event)}
-              onDrop={(event) => onDrop(event, tierIndex)}
-            >
-              <h3>{tier.name}</h3>
-              <ul>
-                <div className="row flex-row flex-wrap justify-content-start">
-                  {tier.items.map((item, index) => (
-                    <div className="col" key={index}>
-                      <div
-                        key={item.name}
-                        draggable
-                        onDragStart={(event) => onDragStart(event, item.name)}
-                      >
-                        <div className="card" style={{ width: "8rem" }}>
-                          <img
-                            data-bs-toggle="popover"
-                            title={item.name}
-                            data-bs-content="And here's some amazing content. It's very engaging. Right?"
-                            src={item.image}
-                            className="card-img-top"
-                            alt={item.name}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </ul>
-            </div>
-          ) : (
-            <div className="itemsPool">
-              <div
-                key={tier.name}
-                className="tier"
-                onDragOver={(event) => onDragOver(event)}
-                onDrop={(event) => onDrop(event, tierIndex)}
-              >
-                <h3 className="text-center">{tier.name}</h3>
-                <div className="row flex-row justify-content-center">
-                  <div className="col col-4">
-                    <div className="input-group mb-3">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Recipient's username"
-                        aria-label="Recipient's username"
-                        aria-describedby="button-addon2"
-                      />
-                      <button
-                        className="btn btn-primary"
-                        type="button"
-                        id="button-addon2"
-                      >
-                        Button
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="row flex-row row-cols-12">
-                  {tier.items.map((item, index) => (
-                    <div className="col" key={index}>
-                      <div
-                        key={index}
-                        draggable
-                        onDragStart={(event) => onDragStart(event, item.name)}
-                      >
-                        <img src={item.image} alt="" />
-                        {item.name}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )
-        )}
-      </div>
+    <div className="TierList">
+      <h2 className="text-start mb-5 mt-3">Tier List</h2>
+      {tiers.map((tier, index) =>
+        tier.name !== "Pool" ? (
+          <Tier
+            name={tier.name}
+            items={tier.items}
+            onDragStart={onDragStart}
+            onDragOver={onDragOver}
+            onDrop={onDrop}
+            tierIndex={index}
+          />
+        ) : (
+          <Pool
+            name={tier.name}
+            items={tier.items}
+            onDragStart={onDragStart}
+            onDragOver={onDragOver}
+            onDrop={onDrop}
+            tierIndex={index}
+            isLoading={isLoading}
+          />
+        )
+      )}
     </div>
   );
 };
