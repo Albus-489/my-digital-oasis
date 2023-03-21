@@ -8,6 +8,7 @@ import Tier from "./tier-components/Tier.component";
 import Pool from "./tier-components/Pool.component";
 import { onDragOver, onDragStart, onDrop } from "./funcs/dragndropHelper";
 import { fetchGameImage } from "./funcs/axiosHelper";
+import { IBaseItem } from "./tier-components/TierCompProps";
 const pepeImage = require("./images/penumbra.jpg");
 
 const TierListPage = () => {
@@ -17,25 +18,9 @@ const TierListPage = () => {
     { name: "B", items: [] },
     { name: "C", items: [] },
     { name: "D", items: [] },
-    {
-      name: "Pool",
-      items: [
-        { name: "Pool", image: pepeImage },
-        { name: "Pool", image: pepeImage },
-        { name: "Pool", image: pepeImage },
-        { name: "Pool", image: pepeImage },
-        { name: "Pool", image: pepeImage },
-      ],
-    },
+    { name: "Pool", items: [] },
   ]);
-  const [searchList, setSearchList] = useState<
-    { name: string; image: string }[]
-  >([
-    { name: "Dark Souls", image: pepeImage },
-    { name: "Dark Souls", image: pepeImage },
-    { name: "Dark Souls", image: pepeImage },
-    { name: "Dark Souls", image: pepeImage },
-  ]);
+  const [searchList, setSearchList] = useState<IBaseItem[]>([]);
   const [gameSearchName, setGameSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
