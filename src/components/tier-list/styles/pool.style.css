@@ -17,14 +17,14 @@
 .testArea{
     background-color: rgba(42, 39, 39, 0.315);
     padding: 1% 5%;
-    max-height: 200px;
+    max-height: 400px;
     overflow: scroll;
     position:initial;
     margin-left: auto;
     margin-right: auto;
     left: 0;
     right: 0;
-    
+
     margin-bottom: 3%;
     border-bottom: 1px solid rgb(143, 55, 55);
     border-top: 1px solid rgb(143, 55, 55);
@@ -39,8 +39,44 @@
 #closeTabBtn{
     color: rgb(143, 55, 55);
     text-decoration: none;
+    font-size: 2rem;
 }
 
 #closeTabBtn:hover{
     color:rgb(226, 72, 72);
 }
+
+#addItemBtn{
+    color: rgba(240, 248, 255, 0.715);
+    font-size: 1.2rem;
+}
+#addItemBtn:hover{
+    color: aliceblue;
+
+}
+
+.summary{
+    max-height: 10rem;
+    overflow: scroll;
+}
+.add{
+    text-align: end;
+}
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    background-color: transparent;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #f5f5f500;
+  }
+
+  ::-webkit-scrollbar-corner{
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #130a06b8;
+    border-radius: 10px;
+  }

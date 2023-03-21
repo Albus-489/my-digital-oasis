@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/searchGames.style.css";
 import { SearchGamesProps, fetchGameImageProps } from "./TierCompProps";
 import { fetchGameImage, fetchGameImages } from "../funcs/axiosHelper";
+import { addToPool } from "../funcs/dragndropHelper";
 
 const SearchGames: React.FC<SearchGamesProps> = ({
   isLoading,
@@ -16,7 +17,7 @@ const SearchGames: React.FC<SearchGamesProps> = ({
   searchList,
   setSearchList,
 }) => {
-  const [listIsActive, setListIsActive] = useState<boolean>(true);
+  const [listIsActive, setListIsActive] = useState<boolean>(false);
   return (
     <div className="centered">
       <div className="searchBox col-md-4">
@@ -68,13 +69,33 @@ const SearchGames: React.FC<SearchGamesProps> = ({
               id="closeTabBtn"
               type="button"
             >
-              close tab
+              ×
             </a>
           </div>
           {searchList.map((item, index) => (
-            <div className="" key={index}>
-              <img src={item.image} alt={item.name} />
-              <p>{item.name}</p>
+            <div
+              className="d-flex row-cols-3 mt-2"
+              key={index}
+              style={{
+                borderTop: "1px solid snow",
+              }}
+            >
+              <div className="col-4">
+                <img src={item.image} alt={item.name} />
+                <p>{item.name}</p>
+              </div>
+              <div className="col-6 summary">{item.summary}</div>
+              <div className="col-2 add">
+                <a
+                  onClick={(e) => {
+                    addToPool(item, tiers, setTierList);
+                  }}
+                  id="addItemBtn"
+                  type="button"
+                >
+                  ADD
+                </a>
+              </div>
             </div>
           ))}
         </div>

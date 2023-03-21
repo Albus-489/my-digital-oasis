@@ -12,7 +12,7 @@ const PoolItems: React.FC<PoolItemsProps> = ({ items, onDragStart }) => {
           onDragStart={(event) => onDragStart(event, item.name)}
         >
           <img src={item.image} alt={item.name} />
-          <p className="poolItemName">{item.name}</p>
+          {/* <p className="poolItemName">{item.name}</p> */}
         </div>
       ))}
     </div>
