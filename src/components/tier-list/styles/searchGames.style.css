@@ -1,0 +1,8 @@
+.findGameBtn{
+    border-radius: 0 5px 5px 0 !important;
+}
+
+.centered{
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,37 @@
+.label-holder{
+    display: flex;
+    color: rgb(53, 39, 39);
+    justify-content: center;
+    align-items: center;
+    min-height: 90px;
+    border-radius: 5px 0 0 5px;
+    background-color: rgba(245, 138, 7, 0.574);
+
+}
+.tier{
+    /* border: 3px solid red; */
+    display: flex;
+    background-color: rgba(42, 39, 39, 0.616);
+    border-radius: 0 5px 5px 0;
+    flex-wrap: wrap;
+}
+
+.item{
+    margin: 0 1% 0 0;
+}
+
+#STierLabel{
+    background-color: rgba(255, 0, 0, 0.800);
+}
+#ATierLabel{
+    background-color: rgba(255, 115, 0, 0.800);
+}
+#BTierLabel{
+    background-color: rgba(255, 255, 1, 0.800);
+}
+#CTierLabel{
+    background-color: rgb(145, 255, 0.800);
+}
+#DTierLabel{
+    background-color: rgba(0, 195, 195, 0.826);
+}
