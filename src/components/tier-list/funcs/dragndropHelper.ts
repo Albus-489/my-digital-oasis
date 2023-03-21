@@ -1,4 +1,5 @@
 import ITier from "../../test/models/ITier";
+import { IBaseItem, ISimpleBaseItem } from "../tier-components/TierCompProps";
 
 export const onDragStart = (event: React.DragEvent, name: string) => {
   event.dataTransfer.setData("text/plain", name);
@@ -37,4 +38,16 @@ export const onDrop = (
   }
 
   console.log(originTierIndex);
+};
+
+export const addToPool = (
+  item: IBaseItem,
+  tiers: ITier[],
+  setTierList: React.Dispatch<React.SetStateAction<ITier[]>>
+) => {
+  const newItem: ISimpleBaseItem = { name: item.name, image: item.image };
+
+  const protoTier = [...tiers];
+  protoTier[5].items.push(newItem);
+  setTierList(protoTier);
 };
