@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import TierListPage from "./components/tier-list/TierListPage";
 import HomePage from "./layout/HomePage";
-import PlayerPage from "./components/player/Player";
 import TestPage from "./components/test/testIGDBAPI";
+import BookAnalysisMainPage from "./components/book-analysis/ba-main-page.component";
 
 function App() {
   return (
@@ -85,7 +85,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/tierlist" element={<TierListPage />} />
-          <Route path="/player" element={<PlayerPage />} />
+          <Route path="/bookanalysis" element={<BookAnalysisMainPage />} />
           <Route path="/test" element={<TestPage />} />
         </Routes>
       </div>
