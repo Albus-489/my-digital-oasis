@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import ITierList from "./models/ITierList";
-// import data from "./data/items.json";
 import "./styles/tierlist.style.css";
-import user_secrets from "./data/IGDBauth.json";
-import axios from "axios";
 import Tier from "./tier-components/Tier.component";
 import Pool from "./tier-components/Pool.component";
-import { onDragOver, onDragStart, onDrop } from "./funcs/dragndropHelper";
-import { fetchGameImage } from "./funcs/axiosHelper";
 import { IBaseItem } from "./tier-components/TierCompProps";
-const pepeImage = require("./images/penumbra.jpg");
+import { downloadFile } from "./funcs/save-upload-tier.functions";
 
 const TierListPage = () => {
   const [tiers, setTierList] = useState<ITierList[]>([
@@ -26,6 +21,7 @@ const TierListPage = () => {
 
   return (
     <div className="TierList">
+      <button onClick={() => downloadFile}>Download File</button>
       <h2 className="text-start mb-5 mt-3">Tier List</h2>
       {tiers.map((tier, index) =>
         tier.name !== "Pool" ? (
