@@ -3,6 +3,7 @@ import user_secrets from "../data/IGDBauth.json";
 import {
   fetchGameImageProps,
   fetchGameImagesProps,
+  IBaseItem,
 } from "../tier-components/TierCompProps";
 
 export async function fetchGameImage({
@@ -52,7 +53,7 @@ export async function fetchGameImages({
 }: fetchGameImagesProps) {
   setIsLoading(true);
 
-  const fields: string = "name,cover.image_id";
+  const fields: string = "name,cover.image_id, summary";
   const limit: number = 10;
   const queryData: string = `search "${gameSearchName}"; fields ${fields}; limit ${limit};`;
 
@@ -67,13 +68,20 @@ export async function fetchGameImages({
     data: queryData,
   })
     .then((response) => {
-      // const imageIDs = response.data.cover.image_id;
-      // const gameFullNames = response.data.name;
-      // const imageURL = `https://images.igdb.com/igdb/image/upload/t_cover_big/${imageId}.jpg`;
-      // console.log(imageURL);
+      const arrayOfItems: IBaseItem[] = response.data.map(
+        (item: any, index: number) => {
+          let obj = {
+            index: index,
+            name: item.name,
+            image: `https://images.igdb.com/igdb/image/upload/t_cover_big/${item.cover?.image_id}.jpg`,
+            summary: item.summary,
+          };
+          return obj;
+        }
+      );
 
-      const updatedList = [...searchList];
-      console.log(response.data);
+      setSearchList(arrayOfItems);
+      console.log(arrayOfItems);
     })
     .catch((error) => {
       console.log(error);
