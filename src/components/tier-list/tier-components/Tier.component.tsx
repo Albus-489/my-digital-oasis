@@ -16,7 +16,7 @@ const Tier: React.FC<TierProps> = ({
       onDragOver={onDragOver}
       onDrop={(event) => onDrop(event, tierIndex, tiers, setTierList)}
     >
-      <div className="label-holder col-1">
+      <div id={name + "TierLabel"} className="label-holder col-1">
         <h2>{name}</h2>
       </div>
       <div className="tier p-2 col-11">
