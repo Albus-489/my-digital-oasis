@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/searchGames.style.css";
 import { SearchGamesProps, fetchGameImageProps } from "./TierCompProps";
 import { fetchGameImage, fetchGameImages } from "../funcs/axiosHelper";
-import { addToPool } from "../funcs/dragndropHelper";
+import { addToPool } from "../funcs/clearAndAdding";
 
 const SearchGames: React.FC<SearchGamesProps> = ({
   isLoading,

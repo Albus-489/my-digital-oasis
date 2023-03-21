@@ -5,6 +5,7 @@ import Tier from "./tier-components/Tier.component";
 import Pool from "./tier-components/Pool.component";
 import { IBaseItem } from "./tier-components/TierCompProps";
 import { downloadFile, uploadFile } from "./funcs/save-upload-tier.functions";
+import { clearTier } from "./funcs/clearAndAdding";
 
 const TierListPage = () => {
   const [tiers, setTierList] = useState<ITierList[]>([
@@ -41,7 +42,7 @@ const TierListPage = () => {
           Download Tier
         </button>
         <button
-          onClick={() => downloadFile(tiers)}
+          onClick={() => clearTier(tiers, setTierList)}
           id="btnClearTierList"
           className="btn btn-sm btn-danger mb-3 col-1 btnClearTierList"
         >
