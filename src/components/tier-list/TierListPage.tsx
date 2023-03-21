@@ -21,8 +21,24 @@ const TierListPage = () => {
 
   return (
     <div className="TierList">
-      <button onClick={() => downloadFile(tiers)}>Download File</button>
       <h2 className="text-start mb-5 mt-3">Tier List</h2>
+      <div className="row flex-row row-cols-2 justify-content-end">
+        <div className="col-3">
+          <div className="input-group mb-3">
+            <input
+              type="file"
+              className="form-control input"
+              id="inputGroupFile02"
+            />
+          </div>
+        </div>
+        <button
+          onClick={() => downloadFile(tiers)}
+          className="btn btn-sm btn-success mb-3 col-2"
+        >
+          Download Tier
+        </button>
+      </div>
       {tiers.map((tier, index) =>
         tier.name !== "Pool" ? (
           <div className="tier-row" key={index}>
@@ -34,20 +50,22 @@ const TierListPage = () => {
             />
           </div>
         ) : (
-          <div className="pool-row" key={index}>
-            <Pool
-              tiers={tiers}
-              setTierList={setTierList}
-              searchList={searchList}
-              setSearchList={setSearchList}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              setGameSearch={setGameSearch}
-              gameSearchName={gameSearchName}
-              tierIndex={index}
-              {...tier}
-            />
-          </div>
+          <>
+            <div className="pool-row" key={index}>
+              <Pool
+                tiers={tiers}
+                setTierList={setTierList}
+                searchList={searchList}
+                setSearchList={setSearchList}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                setGameSearch={setGameSearch}
+                gameSearchName={gameSearchName}
+                tierIndex={index}
+                {...tier}
+              />
+            </div>
+          </>
         )
       )}
     </div>
