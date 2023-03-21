@@ -23,10 +23,8 @@ export type PoolProps = {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   gameSearchName: string;
   setGameSearch: React.Dispatch<React.SetStateAction<string>>;
-  searchList: { name: string; image: string }[];
-  setSearchList: React.Dispatch<
-    React.SetStateAction<{ name: string; image: string }[]>
-  >;
+  searchList: IBaseItem[];
+  setSearchList: React.Dispatch<React.SetStateAction<IBaseItem[]>>;
   name: string;
   items: { name: string; image: string }[];
   tierIndex: number;
@@ -43,10 +41,8 @@ export type SearchGamesProps = {
   tiers: ITier[];
   setTierList: React.Dispatch<React.SetStateAction<ITier[]>>;
 
-  searchList: { name: string; image: string }[];
-  setSearchList: React.Dispatch<
-    React.SetStateAction<{ name: string; image: string }[]>
-  >;
+  searchList: IBaseItem[];
+  setSearchList: React.Dispatch<React.SetStateAction<IBaseItem[]>>;
 };
 
 // ** Axios fetc images
@@ -60,8 +56,19 @@ export type fetchGameImageProps = {
 export type fetchGameImagesProps = {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   gameSearchName: string;
-  searchList: { name: string; image: string }[];
-  setSearchList: React.Dispatch<
-    React.SetStateAction<{ name: string; image: string }[]>
-  >;
+  searchList: IBaseItem[];
+  setSearchList: React.Dispatch<React.SetStateAction<IBaseItem[]>>;
 };
+
+// ?? Items interface
+export interface IBaseItem {
+  name: string;
+  summary: string;
+  image: string;
+  index: number;
+}
+
+export interface ISimpleBaseItem {
+  name: string;
+  image: string;
+}
