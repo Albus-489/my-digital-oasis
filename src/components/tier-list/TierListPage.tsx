@@ -21,7 +21,7 @@ const TierListPage = () => {
 
   return (
     <div className="TierList">
-      <button onClick={() => downloadFile}>Download File</button>
+      <button onClick={() => downloadFile(tiers)}>Download File</button>
       <h2 className="text-start mb-5 mt-3">Tier List</h2>
       {tiers.map((tier, index) =>
         tier.name !== "Pool" ? (
