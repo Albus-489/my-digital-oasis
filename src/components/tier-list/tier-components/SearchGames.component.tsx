@@ -25,8 +25,8 @@ const SearchGames: React.FC<SearchGamesProps> = ({
           <input
             type="text"
             className="form-control"
-            placeholder="Recipient's username"
-            aria-label="Recipient's username"
+            placeholder="Game"
+            aria-label="Game"
             aria-describedby="basic-addon2"
             onChange={(e) => {
               setGameSearch(e.target.value);

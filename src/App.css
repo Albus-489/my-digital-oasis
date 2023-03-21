@@ -4,40 +4,6 @@ header{
     color: aliceblue;
 }
 
-/*
-.pool-items{
-    min-height: 100px;
-    padding: 1%;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: rgba(42, 39, 39, 0.616);
-    display: flex;
-    align-items: center;
-}
-
-.tiers{
-    margin: 2% 0 5% 0;
-    padding: 0 0 3% 0;
-}
-.tier{
-    background-color: rgba(42, 39, 39, 0.616);
-}
-.tier-row{
-    display: flex;
-    align-items: center;
-} */
-/* .tier-items-box{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction:row;
-} */
-
-/* .itemsPool{
-    border-top: 2px solid snow;
-    margin-top: 4%;
-    padding-top: 2%;
-} */
 
 .mylinks{
     color: wheat;
