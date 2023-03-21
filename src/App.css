@@ -12,3 +12,11 @@ header{
 .mylinks:hover{
     color: rgb(122, 158, 178);
 }
+
+#btnDownloadTierList{
+    border-radius: 10px 0 0 10px;
+}
+
+#btnClearTierList{
+    border-radius: 0 10px 10px 0;
+}
