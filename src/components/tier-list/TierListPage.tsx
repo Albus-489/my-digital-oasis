@@ -4,7 +4,7 @@ import "./styles/tierlist.style.css";
 import Tier from "./tier-components/Tier.component";
 import Pool from "./tier-components/Pool.component";
 import { IBaseItem } from "./tier-components/TierCompProps";
-import { downloadFile } from "./funcs/save-upload-tier.functions";
+import { downloadFile, uploadFile } from "./funcs/save-upload-tier.functions";
 
 const TierListPage = () => {
   const [tiers, setTierList] = useState<ITierList[]>([
@@ -29,14 +29,23 @@ const TierListPage = () => {
               type="file"
               className="form-control input"
               id="inputGroupFile02"
+              onChange={(e) => uploadFile(e, setTierList)}
             />
           </div>
         </div>
         <button
           onClick={() => downloadFile(tiers)}
-          className="btn btn-sm btn-success mb-3 col-2"
+          id="btnDownloadTierList"
+          className="btn btn-sm btn-success mb-3 col-1 "
         >
           Download Tier
+        </button>
+        <button
+          onClick={() => downloadFile(tiers)}
+          id="btnClearTierList"
+          className="btn btn-sm btn-danger mb-3 col-1 btnClearTierList"
+        >
+          Clear Tier
         </button>
       </div>
       {tiers.map((tier, index) =>
@@ -50,22 +59,20 @@ const TierListPage = () => {
             />
           </div>
         ) : (
-          <>
-            <div className="pool-row" key={index}>
-              <Pool
-                tiers={tiers}
-                setTierList={setTierList}
-                searchList={searchList}
-                setSearchList={setSearchList}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-                setGameSearch={setGameSearch}
-                gameSearchName={gameSearchName}
-                tierIndex={index}
-                {...tier}
-              />
-            </div>
-          </>
+          <div className="pool-row" key={index}>
+            <Pool
+              tiers={tiers}
+              setTierList={setTierList}
+              searchList={searchList}
+              setSearchList={setSearchList}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              setGameSearch={setGameSearch}
+              gameSearchName={gameSearchName}
+              tierIndex={index}
+              {...tier}
+            />
+          </div>
         )
       )}
     </div>
