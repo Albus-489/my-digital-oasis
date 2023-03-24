@@ -4,6 +4,10 @@ header{
     color: aliceblue;
 }
 
+.navBox{
+    padding: 0 5%;
+    display: flex;
+}
 
 .mylinks{
     color: wheat;

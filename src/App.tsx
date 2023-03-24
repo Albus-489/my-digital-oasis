@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <header className="">
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div className="container-fluid">
+          <div className="navBox">
             <a className="navbar-brand" href="#">
               YDO
             </a>
@@ -39,8 +39,8 @@ function App() {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="player">
-                    Player
+                  <a className="nav-link" href="bookanalysis">
+                    BA
                   </a>
                 </li>
                 <li className="nav-item dropdown">
@@ -52,7 +52,7 @@ function App() {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Additional links
+                    Contancts
                   </a>
                   <ul
                     className="dropdown-menu"
@@ -60,17 +60,12 @@ function App() {
                   >
                     <li>
                       <a className="dropdown-item" href="#">
-                        Action
+                        Telegram
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
+                        E-mail
                       </a>
                     </li>
                   </ul>
