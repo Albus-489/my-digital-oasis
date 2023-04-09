@@ -5,8 +5,8 @@ export const createBook = (
   books: IBook[],
   setBooks: React.Dispatch<React.SetStateAction<IBook[]>>
 ): void => {
-  let tempBooks = books;
-  tempBooks.push(newBook);
+  let tempBooks = [...books];
+  tempBooks.unshift(newBook);
   console.log("This function is called!");
   console.log("Temp => ", tempBooks);
 

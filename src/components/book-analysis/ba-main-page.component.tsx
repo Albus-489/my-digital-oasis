@@ -1,5 +1,6 @@
 import { log } from "console";
 import React, { useEffect, useState } from "react";
+import ModalComponent from "./components/modal.component";
 import { createBook } from "./funcs/createBook";
 import { Book } from "./models/Books";
 import { IBook } from "./models/interfaces/IBook";
@@ -14,6 +15,12 @@ const BookAnalysisMainPage = () => {
     const notes = b.getFullNotes();
     console.log(notes);
   };
+
+  const testCreateBook = (newBook: IBook) => {
+    let tmpBook = [...books];
+    tmpBook.unshift(newBook);
+    setBooks(tmpBook);
+  };
   return (
     <div className="wrapper">
       {/* BOOKS ROW */}
@@ -27,7 +34,7 @@ const BookAnalysisMainPage = () => {
               alt="..."
             />
             <div className="card-body">
-              <h5 className="card-title">Card title</h5>
+              <h5 className="card-title">{book.name}</h5>
               <a href="#" className="btn btn-primary">
                 Open
               </a>
@@ -37,12 +44,16 @@ const BookAnalysisMainPage = () => {
         <div className="addNewBAbox">
           <span
             className="addNewBAtext"
-            onClick={() => createBook(new Book("Name"), books, setBooks)}
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
           >
             + Add
           </span>
         </div>
       </div>
+
+      {/* MODAL */}
+      <ModalComponent books={books} setBooks={setBooks} />
     </div>
   );
 };
