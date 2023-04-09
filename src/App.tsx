@@ -59,12 +59,19 @@ function App() {
                     aria-labelledby="navbarDropdownMenuLink"
                   >
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <a
+                        className="dropdown-item"
+                        href="https://t.me/praise_the_sunnn"
+                        target="_blank"
+                      >
                         Telegram
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <a
+                        className="dropdown-item"
+                        href="mailto:bavrzar@gmail.com"
+                      >
                         E-mail
                       </a>
                     </li>
