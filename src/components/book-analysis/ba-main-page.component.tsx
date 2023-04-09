@@ -1,10 +1,11 @@
 import { log } from "console";
 import React, { useEffect, useState } from "react";
-import ModalComponent from "./components/modal.component";
 import { createBook } from "./funcs/createBook";
 import { Book } from "./models/Books";
 import { IBook } from "./models/interfaces/IBook";
 import "./styles/books-row.css";
+import BooksRow from "./components/books-row.component";
+import ModalComponent from "./components/modal.component";
 const boockCover = require("./images/bookCover.png");
 
 const BookAnalysisMainPage = () => {
@@ -24,33 +25,7 @@ const BookAnalysisMainPage = () => {
   return (
     <div className="wrapper">
       {/* BOOKS ROW */}
-      <div className="books-row">
-        {books.map((book, index) => (
-          <div className="card bg-dark" key={index}>
-            <img
-              id="book-image"
-              src={boockCover}
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <h5 className="card-title">{book.name}</h5>
-              <a href="#" className="btn btn-primary">
-                Open
-              </a>
-            </div>
-          </div>
-        ))}
-        <div className="addNewBAbox">
-          <span
-            className="addNewBAtext"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          >
-            + Add
-          </span>
-        </div>
-      </div>
+      <BooksRow books={books} />
 
       {/* MODAL */}
       <ModalComponent books={books} setBooks={setBooks} />
