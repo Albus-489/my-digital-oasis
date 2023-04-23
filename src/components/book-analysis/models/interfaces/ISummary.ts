@@ -1,4 +1,4 @@
 export interface ISummary {
-  date: Date;
-  notes: string[];
+  notes: string;
+  publishedDate: Date;
 }
